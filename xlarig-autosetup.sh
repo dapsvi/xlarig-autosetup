@@ -73,7 +73,7 @@ com="\$@"
 
 
 
-installationsh="apt update && apt upgrade && apt install git build-essential proot make cmake automake autoconf libssl-dev libcurl4-openssl-dev libtool zlib1g-dev libgmp-dev && git clone https://github.com/scala-network/XLArig && mv ./XLArig ./xlarig && mkdir xlarig/build && chmod +x xlarig/scripts/* && cd xlarig/scripts && ./build_deps.sh && cd ../build && cmake .. -DXMRIG_DEPS=scripts/deps && make -j$(nproc)"
+installationsh="apt update && apt upgrade && apt install git build-essential proot make cmake automake autoconf libssl-dev libcurl4-openssl-dev libtool zlib1g-dev libgmp-dev && git clone https://github.com/scala-network/XLArig && mv ./XLArig ./xlarig && mkdir xlarig/build && chmod +x xlarig/scripts/* && cd xlarig/scripts && ./build_deps.sh && cd ../build && cmake .. -DXMRIG_DEPS=scripts/deps && make -j$(nproc) && cd ../.."
 
 
 
@@ -103,7 +103,7 @@ done
 shift \$((OPTIND -1))
 
 
-rig="cd xlarig && ./xlarig -a panther a -u \$address -p \$WORKER --donate-level=\$donate -k"
+rig="cd xlarig/build && ./xlarig -a panther a -u \$address -p \$WORKER --donate-level=\$donate -k"
 
 
 xcommand+="\$rig"
