@@ -73,7 +73,7 @@ com="\$@"
 
 
 
-installation="apt update && apt upgrade && apt install git build-essential proot make cmake automake autoconf libssl-dev libcurl4-openssl-dev libtool zlib1g-dev libgmp-dev && git clone https://github.com/scala-network/XLArig && mv ./XLArig ./xlarig && mkdir xlarig/build && cd xlarig/scripts && chmod +x * && ./build_deps.sh && cd ../build && cmake .. -DXMRIG_DEPS=scripts/deps && make -j$(nproc)"
+installationsh="apt update && apt upgrade && apt install git build-essential proot make cmake automake autoconf libssl-dev libcurl4-openssl-dev libtool zlib1g-dev libgmp-dev && git clone https://github.com/scala-network/XLArig && mv ./XLArig ./xlarig && mkdir xlarig/build && cd xlarig/scripts && chmod +x * && ./build_deps.sh && cd ../build && cmake .. -DXMRIG_DEPS=scripts/deps && make -j$(nproc)"
 
 
 
@@ -105,7 +105,7 @@ shift \$((OPTIND -1))
 
 rig="./xlarig -a panther a -u \$address -p \$WORKER --donate-level=\$donate -k"
 
-xcommand=\$installation
+
 xcommand+=" && \$rig"
 
 # Use options
@@ -141,7 +141,7 @@ else
 fi
 
 if [[ \$installation -eq 1 ]]; then
-  xcommand+=\$installation
+  xcommand+=" && \$installationsh"
 fi
 
 echo \$xcommand >> ./debian-fs/root/.bashrc
