@@ -106,7 +106,7 @@ shift \$((OPTIND -1))
 rig="./xlarig -a panther a -u \$address -p \$WORKER --donate-level=\$donate -k"
 
 
-xcommand+=" && \$rig"
+xcommand+="\$rig"
 
 # Use options
 if [[ \$solo -eq 1 ]]; then
@@ -117,7 +117,7 @@ else
   xcommand+=" -o mine.scalaproject.io:3333"
 fi
 
-if [[ \$cores -eq 2 ]]; then
+if [[ \$cores -eq 4 ]]; then
   echo "4 cores used"
   xcommand+=" -t 2 --cpu-affinity 0xc0"
 fi
