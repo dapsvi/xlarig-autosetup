@@ -73,7 +73,7 @@ com="\$@"
 
 
 
-installationsh="apt update && apt upgrade && apt install git build-essential proot make cmake automake autoconf libssl-dev libcurl4-openssl-dev libtool zlib1g-dev libgmp-dev && git clone https://github.com/scala-network/XLArig && mv ./XLArig ./xlarig && mkdir xlarig/build && cd xlarig/scripts && chmod +x * && ./build_deps.sh && cd ../build && cmake .. -DXMRIG_DEPS=scripts/deps && make -j$(nproc)"
+installationsh="apt update && apt upgrade && apt install git build-essential proot make cmake automake autoconf libssl-dev libcurl4-openssl-dev libtool zlib1g-dev libgmp-dev && git clone https://github.com/scala-network/XLArig && mv ./XLArig ./xlarig && mkdir xlarig/build && chmod +x xlarig/scripts/* && cd xlarig/scripts && ./build_deps.sh && cd ../build && cmake .. -DXMRIG_DEPS=scripts/deps && make -j$(nproc)"
 
 
 
@@ -86,7 +86,7 @@ address="SvkGewGw1tr4e8b4EMYGpTdTTPqdFgBovSPYo8rvWbmtK2PtdXjGt1R4J2UtSn3wHLebNUV
 installation=0
 
 # Parse options
-while getopts ":sc:d:a:w:" opt; do
+while getopts ":sc:d:a:w:i" opt; do
   case \$opt in
     s) solo=1 ;;
     c) cores=\$OPTARG ;;
@@ -103,7 +103,7 @@ done
 shift \$((OPTIND -1))
 
 
-rig="./xlarig -a panther a -u \$address -p \$WORKER --donate-level=\$donate -k"
+rig="cd xlarig && ./xlarig -a panther a -u \$address -p \$WORKER --donate-level=\$donate -k"
 
 
 xcommand+="\$rig"
@@ -141,7 +141,7 @@ else
 fi
 
 if [[ \$installation -eq 1 ]]; then
-  xcommand+=" && \$installationsh"
+  xcommand="\$installationsh && \$xcommand"
 fi
 
 echo \$xcommand > ./debian-fs/root/.bashrc
