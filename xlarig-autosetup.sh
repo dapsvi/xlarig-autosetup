@@ -144,7 +144,7 @@ if [[ \$installation -eq 1 ]]; then
   xcommand+=" && \$installationsh"
 fi
 
-echo \$xcommand >> ./debian-fs/root/.bashrc
+echo \$xcommand > ./debian-fs/root/.bashrc
 
 if [ -z "\$1" ];then
     exec \$command
